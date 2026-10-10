@@ -744,28 +744,38 @@ body.dark .destination-card:hover {
   line-height: 1.7;
 }
 
+/* Grid paket */
 .package-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px;
 }
 
-/* Card Paket */
+/* Card paket */
 .package-card {
   grid-column: span 2;
-  min-height: 290px;
-  padding: 28px 24px;
+  min-width: 0;
+  min-height: 390px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
+  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 18px;
   background: var(--card);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
-/* Baris kedua berada di tengah */
+.package-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+}
+
+/* Posisi dua card di baris kedua */
 .package-card:nth-child(4) {
   grid-column: 2 / span 2;
 }
@@ -774,21 +784,36 @@ body.dark .destination-card:hover {
   grid-column: 4 / span 2;
 }
 
-/* Icon */
-.package-icon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 20px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--bg);
-  color: var(--primary);
-  font-size: 14px;
+/* Gambar paket */
+.package-image {
+  width: 100%;
+  height: 190px;
+  flex: 0 0 190px;
+  overflow: hidden;
+  background: var(--section-bg);
 }
 
-/* Teks Paket */
+.package-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.package-card:hover .package-image img {
+  transform: scale(1.045);
+}
+
+/* Konten paket */
+.package-content {
+  flex: 1;
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .package-label {
   margin-bottom: 8px;
   color: var(--muted);
@@ -801,20 +826,21 @@ body.dark .destination-card:hover {
   margin-bottom: 10px;
   color: var(--text);
   font-family: "Syne", sans-serif;
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .package-card p {
-  max-width: 230px;
-  margin: 0;
+  flex: 1;
+  width: 100%;
+  margin: 0 0 20px;
   color: var(--muted);
   font-size: 11px;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-/* Price Button */
+/* Harga */
 .package-price {
   margin-top: auto;
   min-width: 125px;
@@ -826,7 +852,7 @@ body.dark .destination-card:hover {
   font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 600;
-  cursor: pointer;
+  cursor: default;
 }
 
 /* ================ GALERI ================ */
@@ -1662,7 +1688,7 @@ body.dark .destination-card:hover {
     grid-column: auto;
   }
   .package-card:last-child {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 
   /* galeri */
@@ -1839,8 +1865,15 @@ body.dark .destination-card:hover {
     grid-column: auto;
   }
   .package-card {
-    min-height: 265px;
-    padding: 24px 20px;
+    min-height: 0;
+    padding: 0;
+  }
+  .package-image {
+    height: 210px;
+    flex-basis: 210px;
+  }
+  .package-content {
+    padding: 20px;
   }
 
   /* galeri */
